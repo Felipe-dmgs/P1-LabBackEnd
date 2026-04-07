@@ -1,10 +1,9 @@
-from fastapi import FastAPI
-from routers.tab_router import router
+from pymongo import MongoClient
 
-app = FastAPI()
+MONGO_URL = "mongodb://localhost:27018"
 
-app.include_router(router)
+client = MongoClient(MONGO_URL)
 
-@app.get("/")
-def home():
-    return {"Message": "Sistema para comandas de restaurante com MongoDB e FastAPI"}
+db = client["P2BackEnd"]
+
+tab_collection = db["Tabs"]
